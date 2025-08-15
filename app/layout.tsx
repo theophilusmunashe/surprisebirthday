@@ -22,6 +22,11 @@ export const metadata: Metadata = {
   title: "Mabel's 21st Birthday Surprise Party",
   description: "Join us for an unforgettable celebration of Mabel Tadakadzwa Makwanise's 21st birthday!",
   generator: "v0.app",
+  icons: {
+    icon: [
+      { url: '/favicon.svg', type: 'image/svg+xml' },
+    ],
+  },
 }
 
 export const viewport: Viewport = {
