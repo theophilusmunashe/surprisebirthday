@@ -46,18 +46,52 @@ export function RSVPModal({ open, onOpenChange }: RSVPModalProps) {
     e.preventDefault()
     setIsSubmitting(true)
 
-    // Simulate form submission with progress
-    await new Promise((resolve) => setTimeout(resolve, 2000))
+    try {
+      // Format the RSVP data for WhatsApp
+      const whatsappMessage = formatRSVPForWhatsApp(formData)
+      
+      // Send to WhatsApp
+      const whatsappNumber = "263779790287" // Remove the + for WhatsApp API
+      const whatsappURL = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`
+      
+      // Small delay for better UX
+      await new Promise((resolve) => setTimeout(resolve, 1500))
+      
+      // Open WhatsApp
+      window.open(whatsappURL, '_blank')
+      
+      setIsSubmitting(false)
+      setIsSubmitted(true)
 
-    setIsSubmitting(false)
-    setIsSubmitted(true)
+      setTimeout(() => {
+        onOpenChange(false)
+        setIsSubmitted(false)
+        setCurrentStep(0)
+        setFormData({ name: "", email: "", phone: "", attendance: "", guests: "1", message: "" })
+      }, 3000)
+    } catch (error) {
+      console.error('Error sending RSVP:', error)
+      setIsSubmitting(false)
+      // You could add error handling here if needed
+    }
+  }
 
-    setTimeout(() => {
-      onOpenChange(false)
-      setIsSubmitted(false)
-      setCurrentStep(0)
-      setFormData({ name: "", email: "", phone: "", attendance: "", guests: "1", message: "" })
-    }, 3000)
+  const formatRSVPForWhatsApp = (data: typeof formData) => {
+    const attendanceText = data.attendance === "yes" ? "✅ YES - I'll be there!" : "❌ Sorry, can't make it"
+    const guestText = data.attendance === "yes" ? `👥 Number of guests: ${data.guests}` : ""
+    
+    return `🎉 *RSVP for Mabel's 21st Birthday Party* 🎂
+
+👤 *Name:* ${data.name}
+📧 *Email:* ${data.email}
+📱 *Phone:* ${data.phone}
+
+🎊 *Attendance:* ${attendanceText}
+${guestText ? guestText + '\n' : ''}
+💌 *Message:* ${data.message || "No message provided"}
+
+---
+Sent via Mabel's Birthday RSVP Form 🎈`
   }
 
   const nextStep = () => {
@@ -121,7 +155,7 @@ export function RSVPModal({ open, onOpenChange }: RSVPModalProps) {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4, duration: 0.5 }}
             >
-              Your RSVP has been received! We can't wait to celebrate Mabel's special day with you. 
+              Your RSVP has been sent via WhatsApp! We can't wait to celebrate Mabel's special day with you. 
               Get ready for an amazing party! 🎂✨
             </motion.p>
 
