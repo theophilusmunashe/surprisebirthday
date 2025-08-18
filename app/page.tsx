@@ -141,7 +141,6 @@ export default function BirthdayPage() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.2, duration: 0.8 }}
                 >
-                  <span className="block text-gray-800 mb-2 sm:mb-0">Join Us for</span>
                   <motion.span 
                     className="block bg-gradient-to-r from-orange-500 via-pink-500 to-purple-500 bg-clip-text text-transparent"
                     animate={{ 
@@ -154,7 +153,7 @@ export default function BirthdayPage() {
                     }}
                     style={{ backgroundSize: "200% 200%" }}
                   >
-                    Mabel's 21st Birthday!
+                    Mabel’s Surprise 21st Birthday !
                   </motion.span>
                 </motion.h1>
 
