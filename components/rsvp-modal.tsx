@@ -42,7 +42,7 @@ export function RSVPModal({ open, onOpenChange }: RSVPModalProps) {
   const [isSubmitted, setIsSubmitted] = useState(false)
   const [currentStep, setCurrentStep] = useState(0)
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     setIsSubmitting(true)
 
@@ -50,15 +50,17 @@ export function RSVPModal({ open, onOpenChange }: RSVPModalProps) {
       // Format the RSVP data for WhatsApp
       const whatsappMessage = formatRSVPForWhatsApp(formData)
       
-      // Send to WhatsApp
-      const whatsappNumber = "263779790287" // Remove the + for WhatsApp API
+      // Build wa.me link (no + sign, international format)
+      const whatsappNumber = "263779790287"
       const whatsappURL = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`
       
-      // Small delay for better UX
-      await new Promise((resolve) => setTimeout(resolve, 1500))
-      
-      // Open WhatsApp
-      window.open(whatsappURL, '_blank')
+      // Open immediately to keep it within the user gesture (prevents popup blockers)
+      const win = window.open(whatsappURL, '_blank')
+
+      // Fallback: if blocked, navigate current tab
+      if (!win) {
+        window.location.href = whatsappURL
+      }
       
       setIsSubmitting(false)
       setIsSubmitted(true)
