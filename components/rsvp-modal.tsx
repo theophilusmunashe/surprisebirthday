@@ -51,7 +51,7 @@ export function RSVPModal({ open, onOpenChange }: RSVPModalProps) {
       const whatsappMessage = formatRSVPForWhatsApp(formData)
       
       // Build wa.me link (no + sign, international format)
-      const whatsappNumber = "263779790287"
+      const whatsappNumber = "263773384348"
       const whatsappURL = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`
       
       // Open immediately to keep it within the user gesture (prevents popup blockers)
@@ -345,6 +345,15 @@ Sent via Mabel's Birthday RSVP Form 🎈`
                     <div className="text-center mb-4 sm:mb-6">
                       <h3 className="text-lg sm:text-xl font-bold text-gray-800 mb-1 sm:mb-2">Will you join the celebration?</h3>
                       <p className="text-sm sm:text-base text-gray-600">We hope to see you there!</p>
+
+                      {/* Important Notes */}
+                      <div className="mt-4 bg-yellow-50 border border-yellow-200 rounded-xl p-3 sm:p-4 text-yellow-800">
+                        <p className="font-semibold mb-1">Important Notes</p>
+                        <ul className="list-disc pl-5 space-y-1 text-sm sm:text-base">
+                          <li>If you bring extra guests, you will pay a fee for them.</li>
+                          <li>If you are not dressed according to the invitation, you will have to pay a fee.</li>
+                        </ul>
+                      </div>
                     </div>
 
                     <motion.div 
