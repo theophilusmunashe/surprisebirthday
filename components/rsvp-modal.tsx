@@ -51,7 +51,7 @@ export function RSVPModal({ open, onOpenChange }: RSVPModalProps) {
       const whatsappMessage = formatRSVPForWhatsApp(formData)
       
       // Build wa.me link (no + sign, international format)
-      const whatsappNumber = "263773384348"
+      const whatsappNumber = "263774924484"
       const whatsappURL = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`
       
       // Open immediately to keep it within the user gesture (prevents popup blockers)
