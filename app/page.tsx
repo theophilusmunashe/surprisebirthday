@@ -16,7 +16,8 @@ import {
   Music,
   Camera,
   Users,
-  Star
+  Star,
+  ChevronDown
 } from "lucide-react"
 import { ConfettiEffect } from "@/components/confetti-effect"
 import { RSVPModal } from "@/components/rsvp-modal"
@@ -219,6 +220,38 @@ export default function BirthdayPage() {
                     </Button>
                   </motion.div>
                 </motion.div>
+
+                {/* Taglines under CTAs */}
+                <motion.div
+                  className="mt-6 sm:mt-8 text-center space-y-3 sm:space-y-4 px-2"
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.8, duration: 0.6 }}
+                >
+                  <div className="inline-flex items-center gap-2 rounded-full bg-white/70 backdrop-blur px-4 py-2 shadow">
+                    <Calendar className="h-4 w-4 text-orange-600" />
+                    <span className="text-sm sm:text-base font-medium text-gray-700">
+                      Please RSVP before <span className="font-bold text-orange-600">27 August 2025</span>.
+                    </span>
+                  </div>
+
+                  <a href="#details" className="group inline-flex flex-col items-center justify-center">
+                    <span className="text-sm sm:text-base font-semibold bg-gradient-to-r from-orange-600 to-pink-600 bg-clip-text text-transparent">
+                      Scroll down for more details
+                    </span>
+                    <div className="mt-1 flex -space-y-2">
+                      <motion.div animate={{ y: [0, 6, 0] }} transition={{ duration: 1.2, repeat: Infinity, ease: 'easeInOut' }}>
+                        <ChevronDown className="h-5 w-5 text-orange-500/80 group-hover:text-orange-600" />
+                      </motion.div>
+                      <motion.div animate={{ y: [3, 9, 3] }} transition={{ duration: 1.2, repeat: Infinity, ease: 'easeInOut', delay: 0.15 }}>
+                        <ChevronDown className="h-5 w-5 text-pink-500/80 group-hover:text-pink-600" />
+                      </motion.div>
+                      <motion.div animate={{ y: [6, 12, 6] }} transition={{ duration: 1.2, repeat: Infinity, ease: 'easeInOut', delay: 0.3 }}>
+                        <ChevronDown className="h-5 w-5 text-purple-500/80 group-hover:text-purple-600" />
+                      </motion.div>
+                    </div>
+                  </a>
+                </motion.div>
               </motion.div>
             )}
           </AnimatePresence>
@@ -227,6 +260,7 @@ export default function BirthdayPage() {
 
       {/* Event Details Section */}
       <motion.section 
+        id="details"
         ref={detailsRef}
         className="px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20 bg-white/50 backdrop-blur-sm"
       >
